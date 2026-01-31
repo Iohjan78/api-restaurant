@@ -1,0 +1,22 @@
+  .env                                                                     
+  pgdata/                                                                  
+  __pycache__/                                                             
+  *.pyc                                                                    
+  instance/                                                                
+  venv/                                                                    
+  .envrc                                                                   
+  node_modules/                                                            
+                                                                           
+  # Temporales                                                             
+  .goutputstream-*                                                         
+  *.log                                                                    
+                                                                           
+  # Build                                                                  
+  dist/                                                                    
+                                                                           
+  # IDE                                                                    
+  .vscode/                                                                 
+  .idea/                                                                   
+                                                                           
+  # Capturas (opcional)                                                    
+  *.png 

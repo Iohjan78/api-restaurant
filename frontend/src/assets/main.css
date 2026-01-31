@@ -1,0 +1,324 @@
+/* ========================================
+   FUENTES
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+/* ========================================
+   ESTILOS GLOBALES
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-image: url('@/assets/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+body {
+  font-family: 'Arial', sans-serif;  
+}
+
+h1, h2, h3,h5, .section-title {
+  font-family: 'Lobster', cursive;  
+}
+.name {
+  font-family: 'Lobster', cursive;
+  font-size: 24px;
+  color: #42b983;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'Lobster', cursive;
+}
+
+/* ========================================
+   BOTONES (usados en todos los componentes)
+   ======================================== */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #42b983;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #359268;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-ver,
+.btn-editar {
+  font-family: 'Arial', sans-serif;
+  padding: 6px 12px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.btn-ver {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-ver:hover {
+  background-color: #138496;
+}
+
+.btn-editar {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.btn-editar:hover {
+  background-color: #e0a800;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+/* ========================================
+   TABLAS (usadas en todos los List)
+   ======================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  color: #333;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* ========================================
+   ACCIONES (usadas en todos los List)
+   ======================================== */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ========================================
+   UTILIDADES
+   ======================================== */
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 18px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 18px;
+}
+
+/* ========================================
+   BADGES (usados en categorías)
+   ======================================== */
+.badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge-plato {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge-postre {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.badge-bebida {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+/* ========================================
+   DETAIL CARDS (usados en todos los Show)
+   ======================================== */
+.detail-card {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.image-container {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.info-grid {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.info-item {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.label {
+  font-weight: bold;
+  color: #666;
+  min-width: 150px;
+}
+
+.value {
+  color: #333;
+  flex: 1;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #42b983;
+}
+/* ========================================
+   FORMULARIOS (usados en todos los Create/Update)
+   ======================================== */
+form {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #42b983;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.app-footer {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  padding: 30px 20px;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.footer-content {
+  max-width: 1060px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.footer-info {
+  color: #ecf0f1;
+  font-size: 13px;
+}
+
+.footer-dev {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 12px;
+  color: #bdc3c7;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content p {
+    font-size: 12px;
+  }
+}
