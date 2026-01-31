@@ -1,32 +1,10 @@
-import psycopg2
-from psycopg2 import sql, errors
+import psycopg
 import os
 from dotenv import load_dotenv
-from urllib.parse import urlparse
 
 load_dotenv()
 
-database_url = os.getenv("DATABASE_URL")
-
-if database_url:
-    # Railway
-    url = urlparse(database_url)
-    DB_CONFIG = {
-        'host': url.hostname,
-        'port': url.port,
-        'user': url.username,
-        'password': url.password,
-        'database': url.path[1:]
-    }
-else:
-    # Local
-    DB_CONFIG = {
-        'host': os.getenv("DB_HOST", "db"),
-        'port': int(os.getenv("DB_PORT", 5432)),
-        'user': os.getenv("POSTGRES_USER", "user"),
-        'password': os.getenv("POSTGRES_PASSWORD", "password"),
-        'database': os.getenv("POSTGRES_DB", "mydatabase")
-    } 
+DATABASE_URL = os.getenv("DATABASE_URL") 
 
 TABLES = {}
 SEEDS = {}
@@ -148,10 +126,11 @@ def create_tables(conn, tables):
             print(f"Creating table {table_name}: ", end="")
             cursor.execute(table_sql)
             print("OK")
-        except errors.DuplicateTable:
-            print("already exists.")
         except Exception as err:
-            print(f"Error: {err}")
+            if "already exists" in str(err):
+                print("already exists.")
+            else:
+                print(f"Error: {err}")
     cursor.close()
 
 
@@ -161,7 +140,8 @@ def seed_tables(conn, seeds):
     for table_name, (sql_query, data) in seeds.items():
         try:
             print(f"Seeding table {table_name}: ", end="")
-            cursor.executemany(sql_query, data)
+            for row in data:
+                cursor.execute(sql_query, row)
             print("OK")
         except Exception as err:
             print(f"Error: {err}")
@@ -170,22 +150,27 @@ def seed_tables(conn, seeds):
 
 if __name__ == "__main__":
     try:
-        #conectar a postgres
-        conn = psycopg2.connect(**DB_CONFIG)
+        if DATABASE_URL:
+            conn = psycopg.connect(DATABASE_URL)
+        else:
+            conn = psycopg.connect(
+                user=os.getenv("POSTGRES_USER"),
+                password=os.getenv("POSTGRES_PASSWORD"),
+                dbname=os.getenv("POSTGRES_DB"),
+                host=os.getenv("DB_HOST", "db"),
+                port=int(os.getenv("DB_PORT", 5432))
+            )
         conn.autocommit = True
-        
+
         print("Conectado a PostgreSQL")
-        
-        #crear tablas
+
         create_tables(conn, TABLES)
-        
-        #insertar datos
         seed_tables(conn, SEEDS)
-        
+
         conn.commit()
         conn.close()
-        
+
         print("\n✅ Base de datos inicializada correctamente!")
-        
+
     except Exception as e:
         print(f"❌ Error: {e}")

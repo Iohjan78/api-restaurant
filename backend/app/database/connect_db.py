@@ -1,8 +1,6 @@
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
 import os
 from dotenv import load_dotenv
-from urllib.parse import urlparse
 
 load_dotenv()
 
@@ -15,21 +13,14 @@ class connectDB:
             database_url = os.getenv("DATABASE_URL")
 
             if database_url:
-                # Railway proporciona DATABASE_URL
-                url = urlparse(database_url)
-                cxn = psycopg2.connect(
-                    user=url.username,
-                    password=url.password,
-                    database=url.path[1:],
-                    host=url.hostname,
-                    port=url.port
-                )
+                # Railway
+                cxn = psycopg.connect(database_url)
             else:
-                # Desarrollo local con variables separadas
-                cxn = psycopg2.connect(
+                # Local
+                cxn = psycopg.connect(
                     user=os.getenv("POSTGRES_USER"),
                     password=os.getenv("POSTGRES_PASSWORD"),
-                    database=os.getenv("POSTGRES_DB"),
+                    dbname=os.getenv("POSTGRES_DB"),
                     host=os.getenv("DB_HOST", "db"),
                     port=int(os.getenv("DB_PORT", 5432))
                 )

@@ -1,7 +1,5 @@
 from app.database.connect_db import connectDB
-import psycopg2
-from psycopg2.extras import RealDictCursor
-import os
+from psycopg.rows import dict_row
 
 
 class PostresModel:
@@ -43,8 +41,7 @@ class PostresModel:
             return False
 
         try:
-            from psycopg2.extras import RealDictCursor
-            with cxn.cursor(cursor_factory=RealDictCursor) as cursor:
+            with cxn.cursor(row_factory=dict_row) as cursor:
                 cursor.execute("""
                     SELECT 
                         p.id,
@@ -77,8 +74,7 @@ class PostresModel:
             return False
 
         try:
-            from psycopg2.extras import RealDictCursor
-            with cxn.cursor(cursor_factory=RealDictCursor) as cursor:
+            with cxn.cursor(row_factory=dict_row) as cursor:
                 cursor.execute(
                     """
                 SELECT 
